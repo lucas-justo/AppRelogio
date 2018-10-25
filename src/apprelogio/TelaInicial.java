@@ -31,18 +31,6 @@ public class TelaInicial extends javax.swing.JFrame {
  }             
  
     
- public void sound() {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(this.getClass().getResource("glassping.wav"));
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-        // If you want the sound to loop infinitely, then put: clip.loop(Clip.LOOP_CONTINUOUSLY); 
-        // If you want to stop the sound, then use clip.stop();
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
-}
  
     public class Contagem implements Runnable {
 
@@ -58,15 +46,15 @@ public class TelaInicial extends javax.swing.JFrame {
             segundo = 0;
         }
         
-        //Runnable sound2 =
-        //(Runnable)Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
+        Runnable sound2 =
+        (Runnable)Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
         
         if (minuto != 0){
             
         for(int u = minuto; minuto > 0; minuto-- )                                         {                                 
             if (minuto == 1) {
-                //sound2.run();
-                sound();
+                sound2.run();
+                
             }
             if (u == minuto){
                  if (segundo == 0){
@@ -214,7 +202,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }  
         }
         //sound2.run();
-        sound();
+        sound2.run();
        btnIniciar1.setEnabled(true);
     }
        
@@ -265,7 +253,6 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnIniciar1 = new javax.swing.JButton();
         hora = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         btn10 = new javax.swing.JButton();
         btn1 = new javax.swing.JButton();
         Reiniciar = new javax.swing.JButton();
@@ -379,9 +366,7 @@ public class TelaInicial extends javax.swing.JFrame {
                                 .addComponent(jLabel3)))
                         .addGap(18, 18, 18)
                         .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE))
                     .addComponent(tempo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -410,7 +395,6 @@ public class TelaInicial extends javax.swing.JFrame {
                                     .addComponent(btn10)
                                     .addComponent(Reiniciar))
                                 .addGap(99, 99, 99))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(tempo2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(232, 232, 232))))
@@ -523,7 +507,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel hora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
