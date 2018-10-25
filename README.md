@@ -11,7 +11,7 @@ Aplicativo de relógio que faz uma contagem regressiva e também exibe o horári
 
 
 ------------------------------------------------------------------------------------------
-Para adicionar o audio que irá tocar adicione um arquivo com o nome glassping.wav dentro de AppRelogio\src\apprelogio.
+
 
 
 
