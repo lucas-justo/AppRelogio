@@ -30,7 +30,20 @@ public class TelaInicial extends javax.swing.JFrame {
     //tempo2.paintImmediately(tempo2.getVisibleRect());
  }             
  
-    
+    public void sound()
+  {
+    try
+    {
+      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("glassping.wav"));
+      Clip clip = AudioSystem.getClip();
+      clip.open(audioInputStream);
+      clip.start();
+    }
+    catch (Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }    
  
     public class Contagem implements Runnable {
 
@@ -46,15 +59,15 @@ public class TelaInicial extends javax.swing.JFrame {
             segundo = 0;
         }
         
-        Runnable sound2 =
-        (Runnable)Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
+        //Runnable sound2 =
+        //(Runnable)Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
         
         if (minuto != 0){
             
         for(int u = minuto; minuto > 0; minuto-- )                                         {                                 
             if (minuto == 1) {
-                sound2.run();
-                
+                //sound2.run();
+                sound();                
             }
             if (u == minuto){
                  if (segundo == 0){
@@ -201,8 +214,8 @@ public class TelaInicial extends javax.swing.JFrame {
                                 }
             }  
         }
+        sound();
         //sound2.run();
-        sound2.run();
        btnIniciar1.setEnabled(true);
     }
        
@@ -250,12 +263,14 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         spMinuto = new javax.swing.JSpinner();
         spSegundo = new javax.swing.JSpinner();
-        jLabel5 = new javax.swing.JLabel();
         btnIniciar1 = new javax.swing.JButton();
         hora = new javax.swing.JLabel();
         btn10 = new javax.swing.JButton();
         btn1 = new javax.swing.JButton();
         Reiniciar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btn15 = new javax.swing.JButton();
+        btn3 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -268,7 +283,7 @@ public class TelaInicial extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1280, 800));
         setPreferredSize(new java.awt.Dimension(1300, 960));
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel1.setText("Insira os minutos");
 
         tempo2.setFont(new java.awt.Font("Verdana", 0, 404)); // NOI18N
@@ -287,19 +302,21 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel3.setText("Insira os segundos");
 
-        spMinuto.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        spMinuto.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         spMinuto.setModel(new javax.swing.SpinnerNumberModel(15, 0, 60, 1));
 
-        spSegundo.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        spSegundo.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         spSegundo.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
 
         btnIniciar1.setBackground(new java.awt.Color(214, 226, 239));
         btnIniciar1.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
         btnIniciar1.setForeground(new java.awt.Color(0, 0, 51));
         btnIniciar1.setText("INICIAR");
+        btnIniciar1.setMaximumSize(new java.awt.Dimension(129, 39));
+        btnIniciar1.setMinimumSize(new java.awt.Dimension(129, 39));
         btnIniciar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciar1ActionPerformed(evt);
@@ -331,9 +348,33 @@ public class TelaInicial extends javax.swing.JFrame {
         Reiniciar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         Reiniciar.setForeground(new java.awt.Color(0, 0, 51));
         Reiniciar.setText("Reiniciar");
+        Reiniciar.setMaximumSize(new java.awt.Dimension(87, 30));
+        Reiniciar.setMinimumSize(new java.awt.Dimension(87, 30));
         Reiniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ReiniciarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/apprelogio/Agergs2.png"))); // NOI18N
+
+        btn15.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btn15.setText("15 Minutos");
+        btn15.setMaximumSize(new java.awt.Dimension(87, 25));
+        btn15.setMinimumSize(new java.awt.Dimension(87, 25));
+        btn15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn15ActionPerformed(evt);
+            }
+        });
+
+        btn3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btn3.setText("3 Minutos");
+        btn3.setMaximumSize(new java.awt.Dimension(87, 25));
+        btn3.setMinimumSize(new java.awt.Dimension(87, 25));
+        btn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3ActionPerformed(evt);
             }
         });
 
@@ -345,17 +386,14 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(tempo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(85, 85, 85))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn10)
+                                .addComponent(btnIniciar1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Reiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnIniciar1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPausar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnPausar, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(spMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -363,41 +401,56 @@ public class TelaInicial extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(spSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)))
-                        .addGap(18, 18, 18)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Reiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(btn10, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE))
-                    .addComponent(tempo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(171, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(spMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(spSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(spMinuto))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnPausar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnIniciar1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btn1)
+                                    .addComponent(Reiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btn10)
-                                    .addComponent(Reiniciar))
-                                .addGap(99, 99, 99))
-                            .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(tempo2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(232, 232, 232))))
+                                    .addComponent(btn15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn1)
+                                    .addComponent(btn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(98, 98, 98))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(tempo2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(232, 232, 232))
         );
 
         pack();
@@ -419,9 +472,11 @@ public class TelaInicial extends javax.swing.JFrame {
         
         
         if(!pausado){
+        btnPausar.setText("CONTINUAR");
         thread.suspend();
         pausado = true;
         }else{
+         btnPausar.setText("PAUSAR");
          thread.resume();
          pausado = false;
          //tempoAtual.setText("");
@@ -442,17 +497,32 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btn10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn10ActionPerformed
         spMinuto.setValue(10);
+         spSegundo.setValue(0);
     }//GEN-LAST:event_btn10ActionPerformed
 
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         spMinuto.setValue(1);
+        spSegundo.setValue(0);
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
         thread.interrupt();
         tempo2.setText("0:00");
+        btnPausar.setText("PAUSAR");
          btnIniciar1.setEnabled(true);
+         spMinuto.setValue(0);
+         spSegundo.setValue(0);
     }//GEN-LAST:event_ReiniciarActionPerformed
+
+    private void btn15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn15ActionPerformed
+       spMinuto.setValue(15);
+         spSegundo.setValue(0);
+    }//GEN-LAST:event_btn15ActionPerformed
+
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
+        spMinuto.setValue(3);
+         spSegundo.setValue(0);
+    }//GEN-LAST:event_btn3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,12 +572,14 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton Reiniciar;
     private javax.swing.JButton btn1;
     private javax.swing.JButton btn10;
+    private javax.swing.JButton btn15;
+    private javax.swing.JButton btn3;
     private javax.swing.JButton btnIniciar1;
     private javax.swing.JButton btnPausar;
     private javax.swing.JLabel hora;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JSpinner spMinuto;
